@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Inventario de alimentos</title>
+
+  <style>
+    :root {
+      --rojo: #b20d18;
+      --oscuro: #151b20;
+      --fondo: #f4f6f8;
+      --borde: #dce1e5;
+      --texto: #172026;
+      --gris: #66737d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: var(--oscuro);
+      color: white;
+      padding: 15px;
+    }
+
+    .encabezado {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--rojo);
+      font-size: 22px;
+    }
+
+    .compania {
+      color: #ffffff99;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 3px 0 0;
+      font-size: 21px;
+    }
+
+    main {
+      width: min(1100px, 100%);
+      margin: auto;
+      padding: 20px 14px 60px;
+    }
+
+    .resumen {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .tarjeta,
+    .panel {
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      box-shadow: 0 3px 10px #0000000b;
+    }
+
+    .tarjeta {
+      padding: 16px;
+    }
+
+    .tarjeta span {
+      color: var(--gris);
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .tarjeta strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 28px;
+    }
+
+    .tarjeta.alerta {
+      background: var(--rojo);
+      color: white;
+    }
+
+    .tarjeta.alerta span {
+      color: #ffffffcc;
+    }
+
+    .pestanas {
+      display: flex;
+      gap: 5px;
+      margin: 20px 0 15px;
+      padding: 5px;
+      overflow-x: auto;
+      background: white;
+      border-radius: 12px;
+    }
+
+    .pestanas button {
+      padding: 10px 15px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .pestanas button.activa {
+      background: var(--rojo);
+      color: white;
+    }
+
+    .vista {
+      display: none;
+    }
+
+    .vista.activa {
+      display: block;
+    }
+
+    .panel {
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      min-width: 700px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 11px;
+      border-bottom: 1px solid #eceff1;
+      text-align: left;
+    }
+
+    th {
+      background: #eef1f4;
+      font-size: 13px;
+    }
+
+    .estado {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .disponible {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .bajo {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .vencer {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .selector-tipo {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .boton {
+      padding: 11px 16px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--rojo);
+      color: white;
+      font-weight: bold;
+    }
+
+    .boton.secundario {
+      background: white;
+      color: var(--texto);
+      border: 1px solid var(--borde);
+    }
+
+    .escaner {
+      margin-bottom: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--oscuro);
+      color: white;
+    }
+
+    .escaner button {
+      width: 100%;
+      margin: 10px 0;
+      background: white;
+      color: black;
+    }
+
+    .formulario {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      margin-top: 6px;
+      padding: 11px;
+      border: 1px solid #cfd6dc;
+      border-radius: 8px;
+      background: white;
+      font-size: 16px;
+    }
+
+    .ancho {
+      grid-column: 1 / -1;
+    }
+
+    .mensaje {
+      padding: 11px;
+      border-radius: 8px;
+      background: #fff3cd;
+      color: #664d03;
+    }
+
+    .movimiento {
+      margin-bottom: 10px;
+      padding: 13px;
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+    }
+
+    .movimiento small {
+      color: var(--gris);
+    }
+
+    #modalEscaner {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      place-items: center;
+      padding: 15px;
+      background: #000000e8;
+      color: white;
+    }
+
+    #modalEscaner.abierto {
+      display: grid;
+    }
+
+    .contenedor-camara {
+      width: min(520px, 100%);
+    }
+
+    video {
+      width: 100%;
+      max-height: 70vh;
+      border: 2px solid white;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 700px) {
+      .resumen {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .formulario {
+        grid-template-columns: 1fr;
+      }
+
+      .ancho {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="encabezado">
+      <div class="logo">🔥</div>
+
+      <div>
+        <div class="compania">Segunda Compañía</div>
+        <h1>Inventario de alimentos</h1>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="resumen">
+      <article class="tarjeta">
+        <span>Productos</span>
+        <strong id="totalProductos">0</strong>
+      </article>
+
+      <article class="tarjeta" id="tarjetaStock">
+        <span>Stock bajo</span>
+        <strong id="totalStockBajo">0</strong>
+      </article>
+
+      <article class="tarjeta" id="tarjetaVencer">
+        <span>Por vencer</span>
+        <strong id="totalVencer">0</strong>
+      </article>
+
+      <article class="tarjeta">
+        <span>Gasto del mes</span>
+        <strong id="gastoMes">$0</strong>
+      </article>
+    </section>
+
+    <nav class="pestanas">
+      <button class="activa" data-vista="inventario">
+        Inventario
+      </button>
+
+      <button data-vista="registrar">
+        Registrar
+      </button>
+
+      <button data-vista="historial">
+        Historial
+      </button>
+
+      <button data-vista="gastos">
+        Gastos
+      </button>
+    </nav>
+
+    <section id="inventario" class="vista activa panel">
+      <h2>Stock actual</h2>
+      <div id="tablaInventario">Cargando...</div>
+    </section>
+
+    <section id="registrar" class="vista">
+      <div class="panel">
+        <div class="selector-tipo">
+          <button
+            id="botonEntrada"
+            class="boton"
+            type="button"
+          >
+            Entrada
+          </button>
+
+          <button
+            id="botonSalida"
+            class="boton secundario"
+            type="button"
+          >
+            Salida
+          </button>
+        </div>
+
+        <div class="escaner">
+          <strong>Escanea el código del producto</strong>
+
+          <button
+            id="abrirEscaner"
+            class="boton"
+            type="button"
+          >
+            Abrir escáner de cámara
+          </button>
+
+          <input
+            id="codigo"
+            placeholder="O escribe el código manualmente"
+          >
+        </div>
+
+        <form id="formulario" class="formulario">
+          <label id="campoNombre">
+            Nombre
+            <input id="nombre">
+          </label>
+
+          <label id="campoCategoria">
+            Categoría
+            <select id="categoria">
+              <option>Abarrotes</option>
+              <option>Bebidas</option>
+              <option>Congelados</option>
+              <option>Refrigerados</option>
+              <option>Condimentos</option>
+              <option>Otros</option>
+            </select>
+          </label>
+
+          <label id="campoUnidad">
+            Unidad
+            <select id="unidad">
+              <option>unidad</option>
+              <option>kg</option>
+              <option>litro</option>
+              <option>paquete</option>
+              <option>caja</option>
+              <option>tarro</option>
+            </select>
+          </label>
+
+          <label id="campoMinimo">
+            Stock mínimo
+            <input
+              id="stockMinimo"
+              type="number"
+              min="0"
+              value="2"
+            >
+          </label>
+
+          <label>
+            Cantidad
+            <input
+              id="cantidad"
+              type="number"
+              min="0.01"
+              step="0.01"
+              required
+            >
+          </label>
+
+          <label id="campoVencimiento">
+            Vencimiento
+            <input id="vencimiento" type="date">
+          </label>
+
+          <label id="campoCosto">
+            Costo total
+            <input id="costo" type="number" min="0">
+          </label>
+
+          <label>
+            Responsable
+            <input
+              id="responsable"
+              placeholder="Nombre del encargado"
+              required
+            >
+          </label>
+
+          <label class="ancho">
+            Observación
+            <input
+              id="observacion"
+              placeholder="Compra, guardia o motivo"
+            >
+          </label>
+
+          <div id="mensaje" class="ancho"></div>
+
+          <button class="boton ancho" type="submit">
+            Registrar movimiento
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section id="historial" class="vista panel">
+      <h2>Historial</h2>
+      <div id="listaHistorial">Cargando...</div>
+    </section>
+
+    <section id="gastos" class="vista panel">
+      <h2>Gastos mensuales</h2>
+      <div id="listaGastos">Cargando...</div>
+    </section>
+  </main>
+
+  <div id="modalEscaner">
+    <div class="contenedor-camara">
+      <button
+        id="cerrarEscaner"
+        class="boton secundario"
+        type="button"
+      >
+        Cerrar
+      </button>
+
+      <h3>Apunta al código de barras</h3>
+      <video id="video" playsinline muted></video>
+      <p id="ayudaEscaner">
+        Mantén el código centrado y con buena iluminación.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbzdXv8hwMjpL_madAn61tjoaZhCHtCvM6x5OuJoLAnbHZOeCJZ47kY-pXaRnWOGmf3zbQ/exec";
+
+    let productos = [];
+    let movimientos = [];
+    let tipoMovimiento = "entrada";
+    let streamCamara = null;
+
+    function jsonp(parametros) {
+      return new Promise((resolve, reject) => {
+        const callback =
+          "respuesta_" +
+          Date.now() +
+          "_" +
+          Math.floor(Math.random() * 100000);
+
+        const script = document.createElement("script");
+
+        const temporizador = setTimeout(() => {
+          delete window[callback];
+          script.remove();
+          reject(new Error("La base de datos no respondió."));
+        }, 20000);
+
+        window[callback] = datos => {
+          clearTimeout(temporizador);
+          delete window[callback];
+          script.remove();
+
+          if (!datos.ok) {
+            reject(new Error(datos.error));
+            return;
+          }
+
+          resolve(datos);
+        };
+
+        const consulta = new URLSearchParams({
+          ...parametros,
+          callback
+        });
+
+        script.src = API_URL + "?" + consulta.toString();
+        script.onerror = () => {
+          clearTimeout(temporizador);
+          delete window[callback];
+          script.remove();
+          reject(new Error("No fue posible conectar con Apps Script."));
+        };
+
+        document.body.appendChild(script);
+      });
+    }
+
+    async function cargarInventario() {
+      try {
+        const datos = await jsonp({
+          accion: "inventario"
+        });
+
+        productos = datos.productos || [];
+        movimientos = datos.movimientos || [];
+
+        mostrarDatos();
+      } catch (error) {
+        document.getElementById("tablaInventario").textContent =
+          error.message;
+      }
+    }
+
+    function mostrarDatos() {
+      const limite = new Date();
+      limite.setDate(limite.getDate() + 30);
+
+      const stockBajo = productos.filter(
+        producto =>
+          producto.stock <= producto.stockMinimo
+      );
+
+      const porVencer = productos.filter(
+        producto =>
+          producto.vencimiento &&
+          new Date(
+            producto.vencimiento + "T12:00:00"
+          ) <= limite
+      );
+
+      const mesActual =
+        new Date().toISOString().slice(0, 7);
+
+      const gasto = movimientos
+        .filter(
+          movimiento =>
+            movimiento.tipo === "entrada" &&
+            movimiento.fecha.slice(0, 7) === mesActual
+        )
+        .reduce(
+          (total, movimiento) =>
+            total + movimiento.costo,
+          0
+        );
+
+      document.getElementById("totalProductos").textContent =
+        productos.length;
+
+      document.getElementById("totalStockBajo").textContent =
+        stockBajo.length;
+
+      document.getElementById("totalVencer").textContent =
+        porVencer.length;
+
+      document.getElementById("gastoMes").textContent =
+        formatoDinero(gasto);
+
+      document
+        .getElementById("tarjetaStock")
+        .classList.toggle("alerta", stockBajo.length > 0);
+
+      document
+        .getElementById("tarjetaVencer")
+        .classList.toggle("alerta", porVencer.length > 0);
+
+      mostrarInventario(limite);
+      mostrarHistorial();
+      mostrarGastos();
+    }
+
+    function mostrarInventario(limite) {
+      if (!productos.length) {
+        document.getElementById("tablaInventario").textContent =
+          "Todavía no hay productos registrados.";
+        return;
+      }
+
+      const filas = productos.map(producto => {
+        const bajo =
+          producto.stock <= producto.stockMinimo;
+
+        const vence =
+          producto.vencimiento &&
+          new Date(
+            producto.vencimiento + "T12:00:00"
+          ) <= limite;
+
+        let estado = "Disponible";
+        let clase = "disponible";
+
+        if (bajo) {
+          estado = "Stock bajo";
+          clase = "bajo";
+        } else if (vence) {
+          estado = "Por vencer";
+          clase = "vencer";
+        }
+
+        return `
+          <tr>
+            <td><strong>${escapar(producto.nombre)}</strong></td>
+            <td>${escapar(producto.categoria)}</td>
+            <td>
+              <strong>${producto.stock}</strong>
+              ${escapar(producto.unidad)}
+            </td>
+            <td>${producto.vencimiento || "Sin fecha"}</td>
+            <td>
+              <span class="estado ${clase}">
+                ${estado}
+              </span>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      document.getElementById("tablaInventario").innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Alimento</th>
+              <th>Categoría</th>
+              <th>Stock</th>
+              <th>Vencimiento</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>${filas}</tbody>
+        </table>
+      `;
+    }
+
+    function mostrarHistorial() {
+      const contenedor =
+        document.getElementById("listaHistorial");
+
+      if (!movimientos.length) {
+        contenedor.textContent =
+          "Todavía no hay movimientos.";
+        return;
+      }
+
+      contenedor.innerHTML = movimientos.map(movimiento => `
+        <article class="movimiento">
+          <strong>
+            ${escapar(movimiento.producto)}
+            · ${movimiento.cantidad}
+          </strong>
+          <br>
+          <small>
+            ${escapar(movimiento.tipo)}
+            por ${escapar(movimiento.responsable)}
+            · ${escapar(movimiento.fecha)}
+            ${movimiento.observacion
+              ? " · " + escapar(movimiento.observacion)
+              : ""}
+          </small>
+        </article>
+      `).join("");
+    }
+
+    function mostrarGastos() {
+      const gastos = {};
+
+      movimientos
+        .filter(movimiento => movimiento.tipo === "entrada")
+        .forEach(movimiento => {
+          const mes = movimiento.fecha.slice(0, 7);
+          gastos[mes] =
+            (gastos[mes] || 0) + movimiento.costo;
+        });
+
+      const meses = Object.entries(gastos)
+        .sort((a, b) => b[0].localeCompare(a[0]));
+
+      document.getElementById("listaGastos").innerHTML =
+        meses.length
+          ? meses.map(([mes, total]) => `
+              <article class="movimiento">
+                <strong>${mes}</strong>
+                <span style="float:right">
+                  ${formatoDinero(total)}
+                </span>
+              </article>
+            `).join("")
+          : "Todavía no existen compras con costo.";
+    }
+
+    function reconocerCodigo(codigo) {
+      document.getElementById("codigo").value = codigo;
+
+      const producto = productos.find(
+        item => item.codigo === codigo
+      );
+
+      const mensaje =
+        document.getElementById("mensaje");
+
+      mensaje.className = "ancho mensaje";
+
+      if (producto) {
+        document.getElementById("nombre").value =
+          producto.nombre;
+
+        mensaje.textContent =
+          "Código reconocido: " + producto.nombre;
+      } else {
+        document.getElementById("nombre").value = "";
+
+        mensaje.textContent =
+          "Código nuevo. Completa los datos del producto.";
+      }
+    }
+
+    document
+      .getElementById("codigo")
+      .addEventListener("change", evento => {
+        reconocerCodigo(evento.target.value.trim());
+      });
+
+    document
+      .getElementById("formulario")
+      .addEventListener("submit", async evento => {
+        evento.preventDefault();
+
+        const mensaje =
+          document.getElementById("mensaje");
+
+        mensaje.className = "ancho mensaje";
+        mensaje.textContent = "Guardando...";
+
+        try {
+          const datos = await jsonp({
+            accion: "registrar",
+            tipo: tipoMovimiento,
+            codigo:
+              document.getElementById("codigo").value.trim(),
+            nombre:
+              document.getElementById("nombre").value.trim(),
+            categoria:
+              document.getElementById("categoria").value,
+            unidad:
+              document.getElementById("unidad").value,
+            stockMinimo:
+              document.getElementById("stockMinimo").value,
+            cantidad:
+              document.getElementById("cantidad").value,
+            vencimiento:
+              document.getElementById("vencimiento").value,
+            costo:
+              document.getElementById("costo").value,
+            responsable:
+              document.getElementById("responsable").value,
+            observacion:
+              document.getElementById("observacion").value
+          });
+
+          mensaje.textContent = datos.mensaje;
+
+          document
+            .getElementById("formulario")
+            .reset();
+
+          document.getElementById("stockMinimo").value = 2;
+          document.getElementById("codigo").value = "";
+
+          await cargarInventario();
+        } catch (error) {
+          mensaje.textContent = error.message;
+        }
+      });
+
+    document
+      .querySelectorAll("[data-vista]")
+      .forEach(boton => {
+        boton.addEventListener("click", () => {
+          document
+            .querySelectorAll("[data-vista]")
+            .forEach(elemento =>
+              elemento.classList.remove("activa")
+            );
+
+          document
+            .querySelectorAll(".vista")
+            .forEach(elemento =>
+              elemento.classList.remove("activa")
+            );
+
+          boton.classList.add("activa");
+
+          document
+            .getElementById(boton.dataset.vista)
+            .classList.add("activa");
+        });
+      });
+
+    document.getElementById("botonEntrada").onclick =
+      () => cambiarTipo("entrada");
+
+    document.getElementById("botonSalida").onclick =
+      () => cambiarTipo("salida");
+
+    function cambiarTipo(tipo) {
+      tipoMovimiento = tipo;
+
+      const entrada =
+        document.getElementById("botonEntrada");
+
+      const salida =
+        document.getElementById("botonSalida");
+
+      entrada.className =
+        tipo === "entrada"
+          ? "boton"
+          : "boton secundario";
+
+      salida.className =
+        tipo === "salida"
+          ? "boton"
+          : "boton secundario";
+
+      [
+        "campoNombre",
+        "campoCategoria",
+        "campoUnidad",
+        "campoMinimo",
+        "campoVencimiento",
+        "campoCosto"
+      ].forEach(id => {
+        document.getElementById(id).style.display =
+          tipo === "entrada" ? "block" : "none";
+      });
+    }
+
+    document.getElementById("abrirEscaner").onclick =
+      abrirEscaner;
+
+    document.getElementById("cerrarEscaner").onclick =
+      cerrarEscaner;
+
+    async function abrirEscaner() {
+      const modal =
+        document.getElementById("modalEscaner");
+
+      const video =
+        document.getElementById("video");
+
+      const ayuda =
+        document.getElementById("ayudaEscaner");
+
+      modal.classList.add("abierto");
+
+      try {
+        streamCamara =
+          await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: {
+                ideal: "environment"
+              }
+            }
+          });
+
+        video.srcObject = streamCamara;
+        await video.play();
+
+        if (!("BarcodeDetector" in window)) {
+          ayuda.textContent =
+            "Este navegador no admite lectura automática.";
+          return;
+        }
+
+        const detector = new BarcodeDetector({
+          formats: [
+            "ean_13",
+            "ean_8",
+            "upc_a",
+            "upc_e",
+            "code_128",
+            "code_39",
+            "itf"
+          ]
+        });
+
+        async function detectar() {
+          if (!streamCamara) {
+            return;
+          }
+
+          try {
+            const codigos =
+              await detector.detect(video);
+
+            if (codigos.length) {
+              reconocerCodigo(codigos[0].rawValue);
+              cerrarEscaner();
+              return;
+            }
+          } catch (error) {
+            console.log(error);
+          }
+
+          requestAnimationFrame(detectar);
+        }
+
+        detectar();
+      } catch (error) {
+        ayuda.textContent =
+          "No fue posible abrir la cámara. Revisa el permiso.";
+      }
+    }
+
+    function cerrarEscaner() {
+      if (streamCamara) {
+        streamCamara
+          .getTracks()
+          .forEach(pista => pista.stop());
+      }
+
+      streamCamara = null;
+
+      document
+        .getElementById("modalEscaner")
+        .classList.remove("abierto");
+    }
+
+    function formatoDinero(valor) {
+      return new Intl.NumberFormat("es-CL", {
+        style: "currency",
+        currency: "CLP",
+        maximumFractionDigits: 0
+      }).format(valor || 0);
+    }
+
+    function escapar(valor) {
+      return String(valor || "").replace(
+        /[&<>"']/g,
+        caracter => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[caracter]
+      );
+    }
+
+    cargarInventario();
+  </script>
+</body>
+</html>
