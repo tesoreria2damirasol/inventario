@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1"
@@ -15,7 +16,6 @@
       --oscuro: #151b20;
       --fondo: #f4f6f8;
       --borde: #dce1e5;
-      --texto: #172026;
       --gris: #66737d;
     }
 
@@ -26,112 +26,92 @@
     body {
       margin: 0;
       background: var(--fondo);
-      color: var(--texto);
+      color: #172026;
       font-family: Arial, sans-serif;
     }
 
     header {
+      padding: 15px;
       background: var(--oscuro);
       color: white;
-      padding: 15px;
+    }
+
+    .encabezado,
+    main {
+      width: min(1050px, 100%);
+      margin: auto;
     }
 
     .encabezado {
-      max-width: 1100px;
-      margin: auto;
       display: flex;
       align-items: center;
-      gap: 12px;
-    }
-
-    .logo {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--rojo);
-      font-size: 22px;
-    }
-
-    .compania {
-      color: #ffffff99;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      justify-content: space-between;
     }
 
     h1 {
-      margin: 3px 0 0;
+      margin: 0;
       font-size: 21px;
     }
 
     main {
-      width: min(1100px, 100%);
-      margin: auto;
       padding: 20px 14px 60px;
+    }
+
+    .panel,
+    .tarjeta {
+      padding: 18px;
+      background: white;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      box-shadow: 0 2px 8px #00000010;
+    }
+
+    .login {
+      width: min(380px, calc(100% - 28px));
+      margin: 10vh auto;
+    }
+
+    .login h2 {
+      text-align: center;
     }
 
     .resumen {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
-    .tarjeta,
-    .panel {
-      background: white;
-      border: 1px solid var(--borde);
-      border-radius: 16px;
-      box-shadow: 0 3px 10px #0000000b;
-    }
-
-    .tarjeta {
-      padding: 16px;
-    }
-
-    .tarjeta span {
+    .tarjeta small {
       color: var(--gris);
-      font-size: 14px;
-      font-weight: bold;
     }
 
     .tarjeta strong {
       display: block;
-      margin-top: 12px;
-      font-size: 28px;
-    }
-
-    .tarjeta.alerta {
-      background: var(--rojo);
-      color: white;
-    }
-
-    .tarjeta.alerta span {
-      color: #ffffffcc;
+      margin-top: 10px;
+      font-size: 27px;
     }
 
     .pestanas {
       display: flex;
       gap: 5px;
-      margin: 20px 0 15px;
+      margin-bottom: 15px;
       padding: 5px;
       overflow-x: auto;
       background: white;
-      border-radius: 12px;
+      border-radius: 11px;
     }
 
     .pestanas button {
-      padding: 10px 15px;
+      padding: 10px 14px;
       border: 0;
-      border-radius: 8px;
       background: transparent;
       font-weight: bold;
       white-space: nowrap;
     }
 
     .pestanas button.activa {
+      border-radius: 8px;
       background: var(--rojo);
       color: white;
     }
@@ -144,100 +124,14 @@
       display: block;
     }
 
-    .panel {
-      padding: 20px;
-      overflow-x: auto;
-    }
-
-    h2 {
-      margin-top: 0;
-    }
-
-    table {
-      width: 100%;
-      min-width: 700px;
-      border-collapse: collapse;
-    }
-
-    th,
-    td {
-      padding: 11px;
-      border-bottom: 1px solid #eceff1;
-      text-align: left;
-    }
-
-    th {
-      background: #eef1f4;
-      font-size: 13px;
-    }
-
-    .estado {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .disponible {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .bajo {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .vencer {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .selector-tipo {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .boton {
-      padding: 11px 16px;
-      border: 0;
-      border-radius: 9px;
-      background: var(--rojo);
-      color: white;
-      font-weight: bold;
-    }
-
-    .boton.secundario {
-      background: white;
-      color: var(--texto);
-      border: 1px solid var(--borde);
-    }
-
-    .escaner {
-      margin-bottom: 18px;
-      padding: 16px;
-      border-radius: 14px;
-      background: var(--oscuro);
-      color: white;
-    }
-
-    .escaner button {
-      width: 100%;
-      margin: 10px 0;
-      background: white;
-      color: black;
-    }
-
-    .formulario {
+    .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 13px;
+    }
+
+    .ancho {
+      grid-column: 1 / -1;
     }
 
     label {
@@ -250,38 +144,90 @@
       width: 100%;
       margin-top: 6px;
       padding: 11px;
-      border: 1px solid #cfd6dc;
+      border: 1px solid #cbd2d8;
       border-radius: 8px;
       background: white;
       font-size: 16px;
     }
 
-    .ancho {
-      grid-column: 1 / -1;
+    .boton {
+      padding: 11px 15px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--rojo);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .secundario {
+      border: 1px solid var(--borde);
+      background: white;
+      color: #172026;
+    }
+
+    .escaner {
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 13px;
+      background: var(--oscuro);
+      color: white;
+    }
+
+    .escaner button {
+      width: 100%;
+      margin: 10px 0;
+      background: white;
+      color: black;
     }
 
     .mensaje {
-      padding: 11px;
+      padding: 10px;
       border-radius: 8px;
       background: #fff3cd;
       color: #664d03;
     }
 
+    .oculto {
+      display: none !important;
+    }
+
+    .tabla {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 650px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #eeeeee;
+      text-align: left;
+    }
+
+    th {
+      background: #eef1f4;
+    }
+
     .movimiento {
-      margin-bottom: 10px;
-      padding: 13px;
+      margin: 8px 0;
+      padding: 11px;
       border: 1px solid var(--borde);
-      border-radius: 12px;
+      border-radius: 10px;
     }
 
     .movimiento small {
       color: var(--gris);
     }
 
-    #modalEscaner {
+    #camara {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 20;
       display: none;
       place-items: center;
       padding: 15px;
@@ -289,28 +235,23 @@
       color: white;
     }
 
-    #modalEscaner.abierto {
+    #camara.abierta {
       display: grid;
     }
 
-    .contenedor-camara {
-      width: min(520px, 100%);
-    }
-
     video {
-      width: 100%;
-      max-height: 70vh;
+      width: min(520px, 100%);
+      max-height: 75vh;
       border: 2px solid white;
-      border-radius: 16px;
-      object-fit: cover;
+      border-radius: 15px;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 650px) {
       .resumen {
         grid-template-columns: 1fr 1fr;
       }
 
-      .formulario {
+      .grid {
         grid-template-columns: 1fr;
       }
 
@@ -322,212 +263,267 @@
 </head>
 
 <body>
-  <header>
-    <div class="encabezado">
-      <div class="logo">🔥</div>
+  <section id="login" class="panel login">
+    <h2>Inventario de alimentos</h2>
 
-      <div>
-        <div class="compania">Segunda Compañía</div>
-        <h1>Inventario de alimentos</h1>
-      </div>
-    </div>
-  </header>
+    <form id="formLogin" class="grid">
+      <label class="ancho">
+        Usuario
+        <input
+          id="usuario"
+          autocomplete="username"
+          required
+        >
+      </label>
 
-  <main>
-    <section class="resumen">
-      <article class="tarjeta">
-        <span>Productos</span>
-        <strong id="totalProductos">0</strong>
-      </article>
+      <label class="ancho">
+        Clave
+        <input
+          id="clave"
+          type="password"
+          autocomplete="current-password"
+          required
+        >
+      </label>
 
-      <article class="tarjeta" id="tarjetaStock">
-        <span>Stock bajo</span>
-        <strong id="totalStockBajo">0</strong>
-      </article>
+      <div
+        id="mensajeLogin"
+        class="ancho"
+      ></div>
 
-      <article class="tarjeta" id="tarjetaVencer">
-        <span>Por vencer</span>
-        <strong id="totalVencer">0</strong>
-      </article>
-
-      <article class="tarjeta">
-        <span>Gasto del mes</span>
-        <strong id="gastoMes">$0</strong>
-      </article>
-    </section>
-
-    <nav class="pestanas">
-      <button class="activa" data-vista="inventario">
-        Inventario
+      <button class="boton ancho">
+        Ingresar
       </button>
+    </form>
+  </section>
 
-      <button data-vista="registrar">
-        Registrar
-      </button>
+  <div id="aplicacion" class="oculto">
+    <header>
+      <div class="encabezado">
+        <h1>🔥 Inventario de alimentos</h1>
 
-      <button data-vista="historial">
-        Historial
-      </button>
-
-      <button data-vista="gastos">
-        Gastos
-      </button>
-    </nav>
-
-    <section id="inventario" class="vista activa panel">
-      <h2>Stock actual</h2>
-      <div id="tablaInventario">Cargando...</div>
-    </section>
-
-    <section id="registrar" class="vista">
-      <div class="panel">
-        <div class="selector-tipo">
-          <button
-            id="botonEntrada"
-            class="boton"
-            type="button"
-          >
-            Entrada
-          </button>
+        <div>
+          <span id="nombreUsuario"></span>
 
           <button
-            id="botonSalida"
+            id="salir"
             class="boton secundario"
-            type="button"
           >
-            Salida
+            Salir
           </button>
         </div>
-
-        <div class="escaner">
-          <strong>Escanea el código del producto</strong>
-
-          <button
-            id="abrirEscaner"
-            class="boton"
-            type="button"
-          >
-            Abrir escáner de cámara
-          </button>
-
-          <input
-            id="codigo"
-            placeholder="O escribe el código manualmente"
-          >
-        </div>
-
-        <form id="formulario" class="formulario">
-          <label id="campoNombre">
-            Nombre
-            <input id="nombre">
-          </label>
-
-          <label id="campoCategoria">
-            Categoría
-            <select id="categoria">
-              <option>Abarrotes</option>
-              <option>Bebidas</option>
-              <option>Congelados</option>
-              <option>Refrigerados</option>
-              <option>Condimentos</option>
-              <option>Otros</option>
-            </select>
-          </label>
-
-          <label id="campoUnidad">
-            Unidad
-            <select id="unidad">
-              <option>unidad</option>
-              <option>kg</option>
-              <option>litro</option>
-              <option>paquete</option>
-              <option>caja</option>
-              <option>tarro</option>
-            </select>
-          </label>
-
-          <label id="campoMinimo">
-            Stock mínimo
-            <input
-              id="stockMinimo"
-              type="number"
-              min="0"
-              value="2"
-            >
-          </label>
-
-          <label>
-            Cantidad
-            <input
-              id="cantidad"
-              type="number"
-              min="0.01"
-              step="0.01"
-              required
-            >
-          </label>
-
-          <label id="campoVencimiento">
-            Vencimiento
-            <input id="vencimiento" type="date">
-          </label>
-
-          <label id="campoCosto">
-            Costo total
-            <input id="costo" type="number" min="0">
-          </label>
-
-          <label>
-            Responsable
-            <input
-              id="responsable"
-              placeholder="Nombre del encargado"
-              required
-            >
-          </label>
-
-          <label class="ancho">
-            Observación
-            <input
-              id="observacion"
-              placeholder="Compra, guardia o motivo"
-            >
-          </label>
-
-          <div id="mensaje" class="ancho"></div>
-
-          <button class="boton ancho" type="submit">
-            Registrar movimiento
-          </button>
-        </form>
       </div>
-    </section>
+    </header>
 
-    <section id="historial" class="vista panel">
-      <h2>Historial</h2>
-      <div id="listaHistorial">Cargando...</div>
-    </section>
+    <main>
+      <section class="resumen">
+        <article class="tarjeta">
+          <small>Productos</small>
+          <strong id="totalProductos">0</strong>
+        </article>
 
-    <section id="gastos" class="vista panel">
-      <h2>Gastos mensuales</h2>
-      <div id="listaGastos">Cargando...</div>
-    </section>
-  </main>
+        <article class="tarjeta">
+          <small>Stock bajo</small>
+          <strong id="stockBajo">0</strong>
+        </article>
 
-  <div id="modalEscaner">
-    <div class="contenedor-camara">
+        <article class="tarjeta">
+          <small>Por vencer</small>
+          <strong id="porVencer">0</strong>
+        </article>
+
+        <article class="tarjeta">
+          <small>Gasto del mes</small>
+          <strong id="gastoMes">$0</strong>
+        </article>
+      </section>
+
+      <nav class="pestanas">
+        <button
+          class="activa"
+          data-vista="inventario"
+        >
+          Inventario
+        </button>
+
+        <button data-vista="registrar">
+          Registrar
+        </button>
+
+        <button data-vista="historial">
+          Historial
+        </button>
+
+        <button data-vista="gastos">
+          Gastos
+        </button>
+      </nav>
+
+      <section
+        id="inventario"
+        class="vista activa panel tabla"
+      >
+        Cargando...
+      </section>
+
+      <section
+        id="registrar"
+        class="vista"
+      >
+        <div class="panel">
+          <p>
+            <button
+              class="boton"
+              data-tipo="entrada"
+            >
+              Entrada
+            </button>
+
+            <button
+              class="boton secundario"
+              data-tipo="salida"
+            >
+              Salida
+            </button>
+          </p>
+
+          <div class="escaner">
+            <strong>
+              Escanea el código
+            </strong>
+
+            <button
+              id="abrirCamara"
+              class="boton"
+              type="button"
+            >
+              Abrir cámara
+            </button>
+
+            <input
+              id="codigo"
+              placeholder="O escribe el código"
+            >
+          </div>
+
+          <form
+            id="formMovimiento"
+            class="grid"
+          >
+            <label class="nuevo">
+              Nombre
+              <input id="nombreProducto">
+            </label>
+
+            <label class="nuevo">
+              Categoría
+              <select id="categoria">
+                <option>Abarrotes</option>
+                <option>Bebidas</option>
+                <option>Congelados</option>
+                <option>Refrigerados</option>
+                <option>Condimentos</option>
+                <option>Otros</option>
+              </select>
+            </label>
+
+            <label class="nuevo">
+              Unidad
+              <select id="unidad">
+                <option>unidad</option>
+                <option>kg</option>
+                <option>litro</option>
+                <option>paquete</option>
+                <option>caja</option>
+                <option>tarro</option>
+              </select>
+            </label>
+
+            <label class="nuevo">
+              Stock mínimo
+              <input
+                id="minimo"
+                type="number"
+                value="2"
+              >
+            </label>
+
+            <label>
+              Cantidad
+              <input
+                id="cantidad"
+                type="number"
+                min="0.01"
+                step="0.01"
+                required
+              >
+            </label>
+
+            <label class="nuevo">
+              Vencimiento
+              <input
+                id="vencimiento"
+                type="date"
+              >
+            </label>
+
+            <label class="nuevo">
+              Costo total
+              <input
+                id="costo"
+                type="number"
+                min="0"
+              >
+            </label>
+
+            <label class="ancho">
+              Observación
+              <input id="observacion">
+            </label>
+
+            <div
+              id="mensaje"
+              class="ancho"
+            ></div>
+
+            <button class="boton ancho">
+              Registrar movimiento
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section
+        id="historial"
+        class="vista panel"
+      ></section>
+
+      <section
+        id="gastos"
+        class="vista panel"
+      ></section>
+    </main>
+  </div>
+
+  <div id="camara">
+    <div>
       <button
-        id="cerrarEscaner"
+        id="cerrarCamara"
         class="boton secundario"
-        type="button"
       >
         Cerrar
       </button>
 
       <h3>Apunta al código de barras</h3>
-      <video id="video" playsinline muted></video>
-      <p id="ayudaEscaner">
-        Mantén el código centrado y con buena iluminación.
+
+      <video
+        id="video"
+        playsinline
+        muted
+      ></video>
+
+      <p id="ayudaCamara">
+        Mantén el código centrado.
       </p>
     </div>
   </div>
@@ -536,507 +532,708 @@
     const API_URL =
       "https://script.google.com/macros/s/AKfycbxuZPxZ4xDSwseDC79UbQ6C6yystjIdxKVTvI5m7H7r-f8IfF3yNy6Rn-kXcl-oSygVPw/exec";
 
+    let token =
+      localStorage.getItem("inventarioToken") || "";
+
     let productos = [];
     let movimientos = [];
     let tipoMovimiento = "entrada";
     let streamCamara = null;
 
-    function jsonp(parametros) {
-      return new Promise((resolve, reject) => {
-        const callback =
-          "respuesta_" +
-          Date.now() +
-          "_" +
-          Math.floor(Math.random() * 100000);
+    const elemento = id =>
+      document.getElementById(id);
 
-        const script = document.createElement("script");
+    function llamarAPI(parametros) {
+      return new Promise(
+        (resolver, rechazar) => {
+          const callback =
+            "respuesta_" +
+            Date.now() +
+            "_" +
+            Math.floor(
+              Math.random() * 100000
+            );
 
-        const temporizador = setTimeout(() => {
-          delete window[callback];
-          script.remove();
-          reject(new Error("La base de datos no respondió."));
-        }, 20000);
+          const script =
+            document.createElement("script");
 
-        window[callback] = datos => {
-          clearTimeout(temporizador);
-          delete window[callback];
-          script.remove();
+          const tiempo = setTimeout(
+            () => {
+              delete window[callback];
+              script.remove();
 
-          if (!datos.ok) {
-            reject(new Error(datos.error));
-            return;
+              rechazar(
+                new Error(
+                  "La base de datos no respondió."
+                )
+              );
+            },
+            20000
+          );
+
+          window[callback] = respuesta => {
+            clearTimeout(tiempo);
+            delete window[callback];
+            script.remove();
+
+            if (!respuesta.ok) {
+              rechazar(
+                new Error(respuesta.error)
+              );
+
+              return;
+            }
+
+            resolver(respuesta);
+          };
+
+          script.src =
+            API_URL +
+            "?" +
+            new URLSearchParams({
+              ...parametros,
+              callback
+            });
+
+          script.onerror = () => {
+            rechazar(
+              new Error(
+                "No fue posible conectar con Apps Script."
+              )
+            );
+          };
+
+          document.body.appendChild(script);
+        }
+      );
+    }
+
+    async function cifrarClave(clave) {
+      const datos =
+        new TextEncoder().encode(clave);
+
+      const hash =
+        await crypto.subtle.digest(
+          "SHA-256",
+          datos
+        );
+
+      return Array.from(
+        new Uint8Array(hash)
+      )
+        .map(valor =>
+          valor
+            .toString(16)
+            .padStart(2, "0")
+        )
+        .join("");
+    }
+
+    elemento("formLogin")
+      .addEventListener(
+        "submit",
+        async evento => {
+          evento.preventDefault();
+
+          elemento("mensajeLogin")
+            .className =
+            "ancho mensaje";
+
+          elemento("mensajeLogin")
+            .textContent =
+            "Ingresando...";
+
+          try {
+            const respuesta =
+              await llamarAPI({
+                accion: "login",
+                usuario:
+                  elemento("usuario").value,
+                clave:
+                  await cifrarClave(
+                    elemento("clave").value
+                  )
+              });
+
+            token = respuesta.token;
+
+            localStorage.setItem(
+              "inventarioToken",
+              token
+            );
+
+            abrirAplicacion(
+              respuesta.usuario
+            );
+
+            await cargarInventario();
+          } catch (error) {
+            elemento("mensajeLogin")
+              .textContent =
+              error.message;
           }
+        }
+      );
 
-          resolve(datos);
-        };
+    function abrirAplicacion(usuario) {
+      elemento("login")
+        .classList.add("oculto");
 
-        const consulta = new URLSearchParams({
-          ...parametros,
-          callback
-        });
+      elemento("aplicacion")
+        .classList.remove("oculto");
 
-        script.src = API_URL + "?" + consulta.toString();
-        script.onerror = () => {
-          clearTimeout(temporizador);
-          delete window[callback];
-          script.remove();
-          reject(new Error("No fue posible conectar con Apps Script."));
-        };
-
-        document.body.appendChild(script);
-      });
+      elemento("nombreUsuario")
+        .textContent =
+        usuario.nombre;
     }
 
     async function cargarInventario() {
       try {
-        const datos = await jsonp({
-          accion: "inventario"
-        });
+        const respuesta =
+          await llamarAPI({
+            accion: "inventario",
+            token
+          });
 
-        productos = datos.productos || [];
-        movimientos = datos.movimientos || [];
+        productos =
+          respuesta.productos || [];
 
-        mostrarDatos();
+        movimientos =
+          respuesta.movimientos || [];
+
+        abrirAplicacion(
+          respuesta.usuario
+        );
+
+        mostrarInformación();
       } catch (error) {
-        document.getElementById("tablaInventario").textContent =
+        localStorage.removeItem(
+          "inventarioToken"
+        );
+
+        token = "";
+
+        elemento("aplicacion")
+          .classList.add("oculto");
+
+        elemento("login")
+          .classList.remove("oculto");
+
+        elemento("mensajeLogin")
+          .className =
+          "ancho mensaje";
+
+        elemento("mensajeLogin")
+          .textContent =
           error.message;
       }
     }
 
-    function mostrarDatos() {
+    function mostrarInformación() {
       const limite = new Date();
-      limite.setDate(limite.getDate() + 30);
 
-      const stockBajo = productos.filter(
-        producto =>
-          producto.stock <= producto.stockMinimo
+      limite.setDate(
+        limite.getDate() + 30
       );
 
-      const porVencer = productos.filter(
-        producto =>
-          producto.vencimiento &&
-          new Date(
-            producto.vencimiento + "T12:00:00"
-          ) <= limite
-      );
-
-      const mesActual =
-        new Date().toISOString().slice(0, 7);
-
-      const gasto = movimientos
-        .filter(
-          movimiento =>
-            movimiento.tipo === "entrada" &&
-            movimiento.fecha.slice(0, 7) === mesActual
-        )
-        .reduce(
-          (total, movimiento) =>
-            total + movimiento.costo,
-          0
+      const bajos =
+        productos.filter(
+          producto =>
+            producto.stock <=
+            producto.stockMinimo
         );
 
-      document.getElementById("totalProductos").textContent =
+      const vencen =
+        productos.filter(
+          producto =>
+            producto.vencimiento &&
+            new Date(
+              producto.vencimiento +
+              "T12:00:00"
+            ) <= limite
+        );
+
+      const mesActual =
+        new Date()
+          .toISOString()
+          .slice(0, 7);
+
+      const gasto =
+        movimientos
+          .filter(
+            movimiento =>
+              movimiento.tipo ===
+                "entrada" &&
+              movimiento.fecha.slice(
+                0,
+                7
+              ) === mesActual
+          )
+          .reduce(
+            (total, movimiento) =>
+              total +
+              movimiento.costo,
+            0
+          );
+
+      elemento("totalProductos")
+        .textContent =
         productos.length;
 
-      document.getElementById("totalStockBajo").textContent =
-        stockBajo.length;
+      elemento("stockBajo")
+        .textContent =
+        bajos.length;
 
-      document.getElementById("totalVencer").textContent =
-        porVencer.length;
+      elemento("porVencer")
+        .textContent =
+        vencen.length;
 
-      document.getElementById("gastoMes").textContent =
+      elemento("gastoMes")
+        .textContent =
         formatoDinero(gasto);
 
-      document
-        .getElementById("tarjetaStock")
-        .classList.toggle("alerta", stockBajo.length > 0);
-
-      document
-        .getElementById("tarjetaVencer")
-        .classList.toggle("alerta", porVencer.length > 0);
-
-      mostrarInventario(limite);
+      mostrarInventario();
       mostrarHistorial();
       mostrarGastos();
     }
 
-    function mostrarInventario(limite) {
+    function mostrarInventario() {
       if (!productos.length) {
-        document.getElementById("tablaInventario").textContent =
-          "Todavía no hay productos registrados.";
+        elemento("inventario")
+          .textContent =
+          "Todavía no hay productos.";
+
         return;
       }
 
-      const filas = productos.map(producto => {
-        const bajo =
-          producto.stock <= producto.stockMinimo;
+      elemento("inventario")
+        .innerHTML = `
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Vencimiento</th>
+              </tr>
+            </thead>
 
-        const vence =
-          producto.vencimiento &&
-          new Date(
-            producto.vencimiento + "T12:00:00"
-          ) <= limite;
+            <tbody>
+              ${productos
+                .map(
+                  producto => `
+                    <tr>
+                      <td>
+                        <strong>
+                          ${escapar(
+                            producto.nombre
+                          )}
+                        </strong>
+                      </td>
 
-        let estado = "Disponible";
-        let clase = "disponible";
+                      <td>
+                        ${escapar(
+                          producto.categoria
+                        )}
+                      </td>
 
-        if (bajo) {
-          estado = "Stock bajo";
-          clase = "bajo";
-        } else if (vence) {
-          estado = "Por vencer";
-          clase = "vencer";
-        }
+                      <td>
+                        ${producto.stock}
+                        ${escapar(
+                          producto.unidad
+                        )}
+                      </td>
 
-        return `
-          <tr>
-            <td><strong>${escapar(producto.nombre)}</strong></td>
-            <td>${escapar(producto.categoria)}</td>
-            <td>
-              <strong>${producto.stock}</strong>
-              ${escapar(producto.unidad)}
-            </td>
-            <td>${producto.vencimiento || "Sin fecha"}</td>
-            <td>
-              <span class="estado ${clase}">
-                ${estado}
-              </span>
-            </td>
-          </tr>
+                      <td>
+                        ${
+                          producto.vencimiento ||
+                          "Sin fecha"
+                        }
+                      </td>
+                    </tr>
+                  `
+                )
+                .join("")}
+            </tbody>
+          </table>
         `;
-      }).join("");
-
-      document.getElementById("tablaInventario").innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Alimento</th>
-              <th>Categoría</th>
-              <th>Stock</th>
-              <th>Vencimiento</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>${filas}</tbody>
-        </table>
-      `;
     }
 
     function mostrarHistorial() {
-      const contenedor =
-        document.getElementById("listaHistorial");
+      elemento("historial")
+        .innerHTML =
+        "<h2>Historial</h2>" +
+        movimientos
+          .map(
+            movimiento => `
+              <article class="movimiento">
+                <strong>
+                  ${escapar(
+                    movimiento.producto
+                  )}
+                  · ${movimiento.cantidad}
+                </strong>
 
-      if (!movimientos.length) {
-        contenedor.textContent =
-          "Todavía no hay movimientos.";
-        return;
-      }
+                <br>
 
-      contenedor.innerHTML = movimientos.map(movimiento => `
-        <article class="movimiento">
-          <strong>
-            ${escapar(movimiento.producto)}
-            · ${movimiento.cantidad}
-          </strong>
-          <br>
-          <small>
-            ${escapar(movimiento.tipo)}
-            por ${escapar(movimiento.responsable)}
-            · ${escapar(movimiento.fecha)}
-            ${movimiento.observacion
-              ? " · " + escapar(movimiento.observacion)
-              : ""}
-          </small>
-        </article>
-      `).join("");
+                <small>
+                  ${escapar(
+                    movimiento.tipo
+                  )}
+                  por
+                  ${escapar(
+                    movimiento.responsable
+                  )}
+                  ·
+                  ${escapar(
+                    movimiento.fecha
+                  )}
+                </small>
+              </article>
+            `
+          )
+          .join("");
     }
 
     function mostrarGastos() {
       const gastos = {};
 
       movimientos
-        .filter(movimiento => movimiento.tipo === "entrada")
+        .filter(
+          movimiento =>
+            movimiento.tipo === "entrada"
+        )
         .forEach(movimiento => {
-          const mes = movimiento.fecha.slice(0, 7);
+          const mes =
+            movimiento.fecha.slice(0, 7);
+
           gastos[mes] =
-            (gastos[mes] || 0) + movimiento.costo;
+            (gastos[mes] || 0) +
+            movimiento.costo;
         });
 
-      const meses = Object.entries(gastos)
-        .sort((a, b) => b[0].localeCompare(a[0]));
-
-      document.getElementById("listaGastos").innerHTML =
-        meses.length
-          ? meses.map(([mes, total]) => `
+      elemento("gastos")
+        .innerHTML =
+        "<h2>Gastos mensuales</h2>" +
+        Object.entries(gastos)
+          .sort()
+          .reverse()
+          .map(
+            ([mes, total]) => `
               <article class="movimiento">
                 <strong>${mes}</strong>
+
                 <span style="float:right">
                   ${formatoDinero(total)}
                 </span>
               </article>
-            `).join("")
-          : "Todavía no existen compras con costo.";
+            `
+          )
+          .join("");
     }
 
-    function reconocerCodigo(codigo) {
-      document.getElementById("codigo").value = codigo;
+    elemento("formMovimiento")
+      .addEventListener(
+        "submit",
+        async evento => {
+          evento.preventDefault();
 
-      const producto = productos.find(
-        item => item.codigo === codigo
-      );
+          elemento("mensaje")
+            .className =
+            "ancho mensaje";
 
-      const mensaje =
-        document.getElementById("mensaje");
+          elemento("mensaje")
+            .textContent =
+            "Guardando...";
 
-      mensaje.className = "ancho mensaje";
+          try {
+            const respuesta =
+              await llamarAPI({
+                accion: "registrar",
+                token,
+                tipo: tipoMovimiento,
+                codigo:
+                  elemento("codigo").value,
+                nombre:
+                  elemento(
+                    "nombreProducto"
+                  ).value,
+                categoria:
+                  elemento("categoria")
+                    .value,
+                unidad:
+                  elemento("unidad").value,
+                stockMinimo:
+                  elemento("minimo").value,
+                cantidad:
+                  elemento("cantidad")
+                    .value,
+                vencimiento:
+                  elemento("vencimiento")
+                    .value,
+                costo:
+                  elemento("costo").value,
+                observacion:
+                  elemento("observacion")
+                    .value
+              });
 
-      if (producto) {
-        document.getElementById("nombre").value =
-          producto.nombre;
+            elemento("mensaje")
+              .textContent =
+              respuesta.mensaje;
 
-        mensaje.textContent =
-          "Código reconocido: " + producto.nombre;
-      } else {
-        document.getElementById("nombre").value = "";
+            evento.target.reset();
 
-        mensaje.textContent =
-          "Código nuevo. Completa los datos del producto.";
-      }
-    }
+            elemento("minimo").value = 2;
+            elemento("codigo").value = "";
 
-    document
-      .getElementById("codigo")
-      .addEventListener("change", evento => {
-        reconocerCodigo(evento.target.value.trim());
-      });
-
-    document
-      .getElementById("formulario")
-      .addEventListener("submit", async evento => {
-        evento.preventDefault();
-
-        const mensaje =
-          document.getElementById("mensaje");
-
-        mensaje.className = "ancho mensaje";
-        mensaje.textContent = "Guardando...";
-
-        try {
-          const datos = await jsonp({
-            accion: "registrar",
-            tipo: tipoMovimiento,
-            codigo:
-              document.getElementById("codigo").value.trim(),
-            nombre:
-              document.getElementById("nombre").value.trim(),
-            categoria:
-              document.getElementById("categoria").value,
-            unidad:
-              document.getElementById("unidad").value,
-            stockMinimo:
-              document.getElementById("stockMinimo").value,
-            cantidad:
-              document.getElementById("cantidad").value,
-            vencimiento:
-              document.getElementById("vencimiento").value,
-            costo:
-              document.getElementById("costo").value,
-            responsable:
-              document.getElementById("responsable").value,
-            observacion:
-              document.getElementById("observacion").value
-          });
-
-          mensaje.textContent = datos.mensaje;
-
-          document
-            .getElementById("formulario")
-            .reset();
-
-          document.getElementById("stockMinimo").value = 2;
-          document.getElementById("codigo").value = "";
-
-          await cargarInventario();
-        } catch (error) {
-          mensaje.textContent = error.message;
+            await cargarInventario();
+          } catch (error) {
+            elemento("mensaje")
+              .textContent =
+              error.message;
+          }
         }
-      });
+      );
 
     document
       .querySelectorAll("[data-vista]")
       .forEach(boton => {
-        boton.addEventListener("click", () => {
+        boton.onclick = () => {
           document
-            .querySelectorAll("[data-vista]")
+            .querySelectorAll(
+              "[data-vista], .vista"
+            )
             .forEach(elemento =>
-              elemento.classList.remove("activa")
-            );
-
-          document
-            .querySelectorAll(".vista")
-            .forEach(elemento =>
-              elemento.classList.remove("activa")
+              elemento.classList.remove(
+                "activa"
+              )
             );
 
           boton.classList.add("activa");
 
+          elemento(
+            boton.dataset.vista
+          ).classList.add("activa");
+        };
+      });
+
+    document
+      .querySelectorAll("[data-tipo]")
+      .forEach(boton => {
+        boton.onclick = () => {
+          tipoMovimiento =
+            boton.dataset.tipo;
+
           document
-            .getElementById(boton.dataset.vista)
-            .classList.add("activa");
-        });
+            .querySelectorAll(
+              "[data-tipo]"
+            )
+            .forEach(elemento => {
+              elemento.className =
+                "boton " +
+                (
+                  elemento === boton
+                    ? ""
+                    : "secundario"
+                );
+            });
+
+          document
+            .querySelectorAll(".nuevo")
+            .forEach(elemento => {
+              elemento.classList.toggle(
+                "oculto",
+                tipoMovimiento === "salida"
+              );
+            });
+        };
       });
 
-    document.getElementById("botonEntrada").onclick =
-      () => cambiarTipo("entrada");
+    function reconocerCodigo(codigo) {
+      elemento("codigo").value = codigo;
 
-    document.getElementById("botonSalida").onclick =
-      () => cambiarTipo("salida");
+      const producto =
+        productos.find(
+          producto =>
+            producto.codigo === codigo
+        );
 
-    function cambiarTipo(tipo) {
-      tipoMovimiento = tipo;
+      elemento("mensaje")
+        .className =
+        "ancho mensaje";
 
-      const entrada =
-        document.getElementById("botonEntrada");
+      if (producto) {
+        elemento("nombreProducto")
+          .value =
+          producto.nombre;
 
-      const salida =
-        document.getElementById("botonSalida");
-
-      entrada.className =
-        tipo === "entrada"
-          ? "boton"
-          : "boton secundario";
-
-      salida.className =
-        tipo === "salida"
-          ? "boton"
-          : "boton secundario";
-
-      [
-        "campoNombre",
-        "campoCategoria",
-        "campoUnidad",
-        "campoMinimo",
-        "campoVencimiento",
-        "campoCosto"
-      ].forEach(id => {
-        document.getElementById(id).style.display =
-          tipo === "entrada" ? "block" : "none";
-      });
-    }
-
-    document.getElementById("abrirEscaner").onclick =
-      abrirEscaner;
-
-    document.getElementById("cerrarEscaner").onclick =
-      cerrarEscaner;
-
-    async function abrirEscaner() {
-      const modal =
-        document.getElementById("modalEscaner");
-
-      const video =
-        document.getElementById("video");
-
-      const ayuda =
-        document.getElementById("ayudaEscaner");
-
-      modal.classList.add("abierto");
-
-      try {
-        streamCamara =
-          await navigator.mediaDevices.getUserMedia({
-            video: {
-              facingMode: {
-                ideal: "environment"
-              }
-            }
-          });
-
-        video.srcObject = streamCamara;
-        await video.play();
-
-        if (!("BarcodeDetector" in window)) {
-          ayuda.textContent =
-            "Este navegador no admite lectura automática.";
-          return;
-        }
-
-        const detector = new BarcodeDetector({
-          formats: [
-            "ean_13",
-            "ean_8",
-            "upc_a",
-            "upc_e",
-            "code_128",
-            "code_39",
-            "itf"
-          ]
-        });
-
-        async function detectar() {
-          if (!streamCamara) {
-            return;
-          }
-
-          try {
-            const codigos =
-              await detector.detect(video);
-
-            if (codigos.length) {
-              reconocerCodigo(codigos[0].rawValue);
-              cerrarEscaner();
-              return;
-            }
-          } catch (error) {
-            console.log(error);
-          }
-
-          requestAnimationFrame(detectar);
-        }
-
-        detectar();
-      } catch (error) {
-        ayuda.textContent =
-          "No fue posible abrir la cámara. Revisa el permiso.";
+        elemento("mensaje")
+          .textContent =
+          "Código reconocido: " +
+          producto.nombre;
+      } else {
+        elemento("mensaje")
+          .textContent =
+          "Código nuevo. Completa sus datos.";
       }
     }
 
-    function cerrarEscaner() {
+    elemento("codigo")
+      .addEventListener(
+        "change",
+        evento =>
+          reconocerCodigo(
+            evento.target.value.trim()
+          )
+      );
+
+    elemento("abrirCamara")
+      .onclick =
+      async () => {
+        elemento("camara")
+          .classList.add("abierta");
+
+        try {
+          streamCamara =
+            await navigator
+              .mediaDevices
+              .getUserMedia({
+                video: {
+                  facingMode: {
+                    ideal: "environment"
+                  }
+                }
+              });
+
+          elemento("video")
+            .srcObject =
+            streamCamara;
+
+          await elemento("video").play();
+
+          if (
+            !("BarcodeDetector" in window)
+          ) {
+            elemento("ayudaCamara")
+              .textContent =
+              "Este navegador no admite lectura automática.";
+
+            return;
+          }
+
+          const detector =
+            new BarcodeDetector({
+              formats: [
+                "ean_13",
+                "ean_8",
+                "upc_a",
+                "upc_e",
+                "code_128",
+                "code_39",
+                "itf"
+              ]
+            });
+
+          async function detectar() {
+            if (!streamCamara) {
+              return;
+            }
+
+            try {
+              const resultados =
+                await detector.detect(
+                  elemento("video")
+                );
+
+              if (resultados.length) {
+                reconocerCodigo(
+                  resultados[0].rawValue
+                );
+
+                cerrarCamara();
+                return;
+              }
+            } catch (error) {
+              console.log(error);
+            }
+
+            requestAnimationFrame(
+              detectar
+            );
+          }
+
+          detectar();
+        } catch (error) {
+          elemento("ayudaCamara")
+            .textContent =
+            "No fue posible abrir la cámara.";
+        }
+      };
+
+    function cerrarCamara() {
       if (streamCamara) {
         streamCamara
           .getTracks()
-          .forEach(pista => pista.stop());
+          .forEach(pista =>
+            pista.stop()
+          );
       }
 
       streamCamara = null;
 
-      document
-        .getElementById("modalEscaner")
-        .classList.remove("abierto");
+      elemento("camara")
+        .classList.remove("abierta");
     }
 
+    elemento("cerrarCamara")
+      .onclick = cerrarCamara;
+
+    elemento("salir")
+      .onclick =
+      async () => {
+        try {
+          await llamarAPI({
+            accion: "logout",
+            token
+          });
+        } catch (error) {}
+
+        localStorage.removeItem(
+          "inventarioToken"
+        );
+
+        location.reload();
+      };
+
     function formatoDinero(valor) {
-      return new Intl.NumberFormat("es-CL", {
-        style: "currency",
-        currency: "CLP",
-        maximumFractionDigits: 0
-      }).format(valor || 0);
+      return new Intl.NumberFormat(
+        "es-CL",
+        {
+          style: "currency",
+          currency: "CLP",
+          maximumFractionDigits: 0
+        }
+      ).format(valor || 0);
     }
 
     function escapar(valor) {
-      return String(valor || "").replace(
-        /[&<>"']/g,
-        caracter => ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        })[caracter]
-      );
+      return String(valor || "")
+        .replace(
+          /[&<>"']/g,
+          caracter => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+          })[caracter]
+        );
     }
 
-    cargarInventario();
+    if (token) {
+      cargarInventario();
+    }
   </script>
 </body>
 </html>
